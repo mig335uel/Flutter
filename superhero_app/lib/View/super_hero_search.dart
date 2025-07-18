@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:superhero_app/Data/Model/superhero_details_response.dart';
 import 'package:superhero_app/Data/Model/superhero_response.dart';
 import 'package:superhero_app/Data/repository.dart';
+import 'package:superhero_app/View/superhero_details_screen.dart';
 
 class SuperHeroSearchScreen extends StatefulWidget {
   const SuperHeroSearchScreen({super.key});
@@ -48,7 +49,7 @@ class _SuperHeroSearchScreenState extends State<SuperHeroSearchScreen> {
     return FutureBuilder(
       future: _superHeroInfo,
       builder: (context, snapshot) {
-        if(textEmpty) return Text("Introduce un nombre");
+        if (textEmpty) return Text("Introduce un nombre");
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         } else if (snapshot.hasError) {
@@ -61,7 +62,8 @@ class _SuperHeroSearchScreenState extends State<SuperHeroSearchScreen> {
               itemBuilder: (context, index) {
                 if (listaHeroe != null) {
                   return itemHero(listaHeroe[index]);
-                } else return null;
+                } else
+                  return null;
               },
             ),
           );
@@ -73,29 +75,45 @@ class _SuperHeroSearchScreenState extends State<SuperHeroSearchScreen> {
   }
 
   Padding itemHero(SuperheroDetailsResponse item) => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black12),
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.red,
-    
+    padding: const EdgeInsets.only(top: 16, bottom: 16, left: 8, right: 8),
+    child: GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SuperheroDetailsScreen(superhero: item),
+        ),
       ),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.network(
-              item.url,
-              width: double.infinity,
-              height: 250,
-              fit: BoxFit.cover,
-              alignment: Alignment(0, -0.6),
-            ),
+
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black12),
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.red),
+
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.network(
+                  item.url,
+                  width: double.infinity,
+                  height: 250,
+                  fit: BoxFit.cover,
+                  alignment: Alignment(0, -0.6),
+                ),
+              ),
+              Text(
+                item.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ],
           ),
-          Text(item.name, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight:FontWeight.w300)),
-        ],
+        ),
       ),
-    ),
+    
   );
 }
