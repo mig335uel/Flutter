@@ -61,8 +61,7 @@ class _SuperHeroSearchScreenState extends State<SuperHeroSearchScreen> {
               itemBuilder: (context, index) {
                 if (listaHeroe != null) {
                   return itemHero(listaHeroe[index]);
-                } else
-                  return null;
+                } else return null;
               },
             ),
           );
