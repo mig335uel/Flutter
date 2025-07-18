@@ -13,6 +13,7 @@ class SuperHeroSearchScreen extends StatefulWidget {
 class _SuperHeroSearchScreenState extends State<SuperHeroSearchScreen> {
   Future<SuperheroResponse?>? _superHeroInfo;
   Repository repo = Repository();
+  bool _isTextEmpty = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,21 +32,23 @@ class _SuperHeroSearchScreenState extends State<SuperHeroSearchScreen> {
               ),
               onChanged: (text) {
                 setState(() {
+                  _isTextEmpty = text.isEmpty;
                   _superHeroInfo = repo.fetchSuperHeroInfo(text);
                 });
               },
             ),
-            bodyBuild(),
+            bodyBuild(_isTextEmpty),
           ],
         ),
       ),
     );
   }
 
-  FutureBuilder bodyBuild() {
+  FutureBuilder bodyBuild(bool textEmpty) {
     return FutureBuilder(
       future: _superHeroInfo,
       builder: (context, snapshot) {
+        if(textEmpty) return Text("Introduce un nombre");
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         } else if (snapshot.hasError) {
@@ -91,7 +94,7 @@ class _SuperHeroSearchScreenState extends State<SuperHeroSearchScreen> {
               alignment: Alignment(0, -0.6),
             ),
           ),
-          Text(item.name, style: TextStyle(fontSize: 20, color: Colors.white)),
+          Text(item.name, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight:FontWeight.w300)),
         ],
       ),
     ),
