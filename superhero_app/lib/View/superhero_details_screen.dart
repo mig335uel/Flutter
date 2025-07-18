@@ -46,26 +46,118 @@ class SuperheroDetailsScreen extends StatelessWidget {
                 color: Color.fromARGB(61, 192, 192, 192),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: ListView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Real Name: ${superhero.fullName}",
-                        style: TextStyle(fontSize: 15, color: Colors.indigo),
-                      ),
-                      Text("\n"),
+                  Text(
+                    "Real Name: ${superhero.fullName}",
+                    style: TextStyle(fontSize: 15, color: Colors.indigo),
+                  ),
+                  Text("\n"),
 
-                      Text(
-                        "PowerStats:",
-                        style: TextStyle(fontSize: 20, color: Colors.indigo),
-                      ),
-                      Row(children: [
-                        Text("intelligence:\t", style: TextStyle(fontSize: 15, color: Colors.indigo)),
-                        Text(superhero.powerStats.intelligence, style: TextStyle(fontSize: 15, color: Colors.indigo)),
-                      ],)
-                    ],
+                  Text(
+                    "PowerStats:",
+                    style: TextStyle(fontSize: 20, color: Colors.indigo),
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: double.parse(superhero.powerStats.power),
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF00BB19),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            Text("Power"),
+                          ],
+                        ),
+
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: double.parse(
+                                superhero.powerStats.intelligence,
+                              ),
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF0015D1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            Text("Intelligence"),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: double.parse(
+                                superhero.powerStats.durability,
+                              ),
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF01C7B6),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            Text("Durability"),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: double.parse(
+                                superhero.powerStats.strength,
+                              ),
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFA0E919),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            Text("Strength"),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: double.parse(
+                                superhero.powerStats.speed,
+                              ),
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFA0E919),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            Text("Speed"),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: double.parse(superhero.powerStats.combat),
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF8F009C),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            Text("Combact"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
